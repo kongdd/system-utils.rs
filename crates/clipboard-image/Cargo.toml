@@ -2,6 +2,11 @@
 name = "clipboard-image"
 version = "0.1.0"
 edition = "2024"
+# tests/target.rs is included by the binary as a unit test module.
+autotests = false
+
+[[test]]
+name = "cli"
 
 [dependencies]
 arboard = { version = "3.6", default-features = false, features = ["image-data"] }
