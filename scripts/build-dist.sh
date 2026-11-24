@@ -27,7 +27,7 @@ build() (
     release="target/$target/release"
     dist="dist/$platform"
     mkdir -p "$dist"
-    cp "$release/clipboard-image$suffix" "$release/audio-player$suffix" \
+    cp "$release/clipboard-image$suffix" "$release/audio-player$suffix" "$release/lines$suffix" \
         "$work/bin/edge-tts-rust$suffix" "$work/edge-tts-rust-LICENSE" "$dist/"
     if [[ "$platform" == windows-x64 ]]; then
         cp "$release/add-path.exe" "$dist/"

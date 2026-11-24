@@ -1,0 +1,13 @@
+[package]
+name = "lines"
+version = "0.1.0"
+edition = "2024"
+description = "Show line counts in a directory tree"
+
+[dependencies]
+anstream = "1"
+ignore = "0.4"
+unicode-width = { version = "0.2", default-features = false }
+
+[dev-dependencies]
+tempfile = "3"
