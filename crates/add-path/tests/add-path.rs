@@ -7,10 +7,7 @@ fn appends_without_overwriting_or_duplicating() -> io::Result<()> {
 
     // 使用临时注册表项，不写真实的 HKCU\Environment。
     let user = RegKey::predef(HKEY_CURRENT_USER);
-    let name = format!(
-        "Software\\add-path-test-{}",
-        sandbox.path().file_name().unwrap().display()
-    );
+    let name = format!("Software\\add-path-test-{}", sandbox.path().file_name().unwrap().display());
     let (key, _) = user.create_subkey(&name)?;
     let result = (|| -> io::Result<_> {
         let original = r"%LOCALAPPDATA%\Tools;C:\Other";
@@ -37,9 +34,6 @@ fn appends_without_overwriting_or_duplicating() -> io::Result<()> {
     assert!(added && !added_again);
     assert_eq!(kind, REG_EXPAND_SZ);
     let paths: Vec<_> = std::env::split_paths(&path).collect();
-    assert_eq!(
-        paths,
-        [r"%LOCALAPPDATA%\Tools".into(), r"C:\Other".into(), bin]
-    );
+    assert_eq!(paths, [r"%LOCALAPPDATA%\Tools".into(), r"C:\Other".into(), bin]);
     Ok(())
 }

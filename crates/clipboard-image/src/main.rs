@@ -39,9 +39,7 @@ fn target(mut args: impl Iterator<Item = OsString>) -> Result<Target, String> {
     match (args.next(), args.next(), args.next()) {
         (Some(flag), None, None) if flag == "--stdout" => Ok(Target::Stdout),
         (Some(flag), Some(path), None) if flag == "--output" => Ok(Target::File(path)),
-        _ => Err(format!(
-            "usage: {COMMAND} --stdout | {COMMAND} --output PATH"
-        )),
+        _ => Err(format!("usage: {COMMAND} --stdout | {COMMAND} --output PATH")),
     }
 }
 

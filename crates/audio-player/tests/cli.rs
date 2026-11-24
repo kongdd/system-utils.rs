@@ -47,8 +47,5 @@ fn reports_unreadable_input() {
     assert_eq!(output.status.code(), Some(1));
     assert!(output.stdout.is_empty());
     let error = String::from_utf8(output.stderr).unwrap();
-    assert!(
-        error.starts_with(&format!("audio-player: {}: ", path.display())),
-        "{error}"
-    );
+    assert!(error.starts_with(&format!("audio-player: {}: ", path.display())), "{error}");
 }
