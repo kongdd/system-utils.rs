@@ -11,7 +11,7 @@ clipboard-image --output shot.png    # 保存到指定路径
 audio-player song.mp3                # 播放 MP3
 ```
 
-在 Windows 上运行 `add-path "C:\Tools"`，然后打开新终端。已存在的目录不会重复添加。
+在 Windows 上运行 `add-path "C:\Tools"`，然后打开新终端。已存在的目录不会重复添加。`add-path -f ~/.local/bin` 会展开 `~`，并在添加 PATH 前递归创建目录。
 
 `clipboard-image` 需要访问桌面剪贴板，输出的 PNG 不得超过 18 MiB。剪贴板无图片、图片超限或写入失败时，程序向标准错误输出错误信息，并以非零状态退出。Pi 扩展的用法见 [Pi 扩展文档](docs/pi-clipimg.md)。
 

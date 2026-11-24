@@ -2,12 +2,8 @@
 name = "add-path"
 version = "0.1.0"
 edition = "2024"
-# tests/add-path.rs is included as a unit test module.
+# Test files are included as unit test modules.
 autotests = false
-
-[[bin]]
-name = "add-path"
-path = "src/add-path.rs"
 
 [target.'cfg(windows)'.dependencies]
 winreg = "0.56"
