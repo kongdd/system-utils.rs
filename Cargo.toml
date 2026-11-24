@@ -1,5 +1,6 @@
 [workspace]
-members = ["crates/clipboard-image", "crates/audio-player"]
+members = ["crates/add-path", "crates/clipboard-image", "crates/audio-player"]
+exclude = ["crates/modern-cug-herper"]
 resolver = "3"
 
 [profile.release]

@@ -29,6 +29,9 @@ build() (
     mkdir -p "$dist"
     cp "$release/clipboard-image$suffix" "$release/audio-player$suffix" \
         "$work/bin/edge-tts-rust$suffix" "$work/edge-tts-rust-LICENSE" "$dist/"
+    if [[ "$platform" == windows-x64 ]]; then
+        cp "$release/add-path.exe" "$dist/"
+    fi
 )
 
 usage() {

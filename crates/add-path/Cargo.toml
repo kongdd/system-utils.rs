@@ -1,0 +1,17 @@
+[package]
+name = "add-path"
+version = "0.1.0"
+edition = "2024"
+# tests/add-path.rs is included as a unit test module.
+autotests = false
+
+[[bin]]
+name = "add-path"
+path = "src/add-path.rs"
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.56"
+windows-sys = { version = "0.61", features = ["Win32_UI_WindowsAndMessaging"] }
+
+[target.'cfg(windows)'.dev-dependencies]
+tempfile = "3"
