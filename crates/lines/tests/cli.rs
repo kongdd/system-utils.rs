@@ -132,8 +132,11 @@ fn inline_thresholds_default_to_warn_unless_a_filter_is_explicit() {
         fs::write(crates.join(name), b"\n".repeat(n)).unwrap();
     }
     for (flags, expected) in [
-        (&["--n-warn=100"][..], "warn.rs  (500) ++++++++++\n"),
-        (&["--n-bad=500"], "warn.rs  (500) ++++++++++\n"),
+        (
+            &["--n-warn=100"][..],
+            "bad.rs  (1,001) ++++++++++++++++++++\nwarn.rs   (500) ++++++++++\n",
+        ),
+        (&["--n-bad=500"], "bad.rs  (1,001) ++++++++++++++++++++\nwarn.rs   (500) ++++++++++\n"),
         (&["--n-warn=100", "--bad"], "bad.rs  (1,001) ++++++++++++++++++++\n"),
     ] {
         let output =
@@ -159,9 +162,12 @@ fn filters_files_using_temporary_thresholds() {
         String::from_utf8(output.stdout).unwrap().replace('\\', "/")
     };
 
-    assert_eq!(run(&["--warn", "--n-warn", "100", "--exts", "rs"]), "src/warn.rs  (100) ++\n");
+    assert_eq!(
+        run(&["--warn", "--n-warn", "100", "--exts", "rs"]),
+        "bad.rs     (1,001) ++++++++++++++++++++\nsrc/warn.rs  (100) ++\n"
+    );
     assert_eq!(run(&["--bad"]), "bad.rs  (1,001) ++++++++++++++++++++\n");
-    assert_eq!(run(&["--warn"]), "[ok] no warn file\n");
+    assert_eq!(run(&["--warn"]), "bad.rs  (1,001) ++++++++++++++++++++\n");
     assert_eq!(
         run(&["--warn", "--bad", "--n-warn", "100"]),
         "bad.rs     (1,001) ++++++++++++++++++++\nnotes.txt    (100) ++\nsrc/warn.rs  (100) ++\n"

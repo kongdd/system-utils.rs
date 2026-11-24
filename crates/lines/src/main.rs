@@ -259,7 +259,7 @@ fn print_filtered(
     let include = |lines| match Level::of(lines, thresholds) {
         Level::Normal => false,
         Level::Warn => warn,
-        Level::Bad => bad,
+        Level::Bad => warn || bad,
     };
     collect_files(entries, Path::new(""), &include, &mut files);
     if files.is_empty() {
@@ -306,7 +306,7 @@ fn run() -> Result<(), Box<dyn Error>> {
         match flag {
             Some("-h" | "--help") => {
                 println!("{USAGE}\n       {FILTER_USAGE}\n       {}", config::USAGE);
-                println!("\nUse --warn, --bad, or both to list only matching files.");
+                println!("\n--warn includes warning and bad files; --bad shows only bad files.");
                 println!("Threshold overrides imply --warn unless a filter is specified.");
                 return Ok(());
             }
